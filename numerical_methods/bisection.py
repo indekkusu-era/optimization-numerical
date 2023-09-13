@@ -41,7 +41,7 @@ def bisection(f, a, b, max_iter=100, eps=1e-5):
             b = c
         else:
             a = c
-        if np.abs(a - b) <= 2 * eps:
+        if np.abs(b - a) <= 2 * eps:
             break
     return BisectionResult(
         max_iteration=iteration,
