@@ -22,9 +22,10 @@ class NewtonArmijoResult:
 def armijo_line_search(f, x, gradient, step_direction, alpha_0=2, sigma=0.48, beta=0.95, max_iter=20):
     alpha = alpha_0
     for _ in range(max_iter):
-        alpha *= beta
-        if f(*(x + alpha * step_direction)) <= f(*x) + alpha * sigma * float(gradient(x).reshape((1, -1)) @ step_direction.reshape(-1, 1)):
+        alpha2 = alpha * beta
+        if f(*(x + alpha2 * step_direction)) <= f(*x) + alpha2 * sigma * float(gradient(x).reshape((1, -1)) @ step_direction.reshape(-1, 1)):
             break
+        alpha = alpha2
     return alpha
 
 def optimize_newton_armijo(f, x0, gradient=None, hessian=None, max_iter=100, eps=1e-5):
