@@ -48,7 +48,7 @@ def optimize_newton_armijo(f, x0, gradient=None, hessian=None, max_iter=100, eps
             f_x=f(*x1)
         ))
         x = x1
-        if np.linalg.norm(step_direction * alpha) <= eps:
+        if np.linalg.norm(step_direction) <= eps:
             break
     return NewtonArmijoResult(
         max_iteration=iteration+1,

@@ -28,8 +28,8 @@ def steepest_descent(f, x0, gradient=None, max_iter=100, eps=1e-5):
     for iteration in range(max_iter):
         step_direction = -gradient(x)
         ft = lambda t: f(*(x + t * step_direction))
-        dft = lambda t: (ft(t + 1e-5) - ft(t)) / 1e-5
-        d2ft = lambda t: (dft(t + 1e-5) - dft(t)) / 1e-5
+        dft = lambda t: (ft(t + 1e-2) - ft(t)) / 1e-2
+        d2ft = lambda t: (dft(t + 1e-2) - dft(t)) / 1e-2
         step_size = optimize_newton(dft, d2ft, 1)
         step_size = step_size.solution
         x1 = x + float(step_size) * step_direction
@@ -43,7 +43,7 @@ def steepest_descent(f, x0, gradient=None, max_iter=100, eps=1e-5):
             )
         )
         x = x1
-        if np.linalg.norm(step_direction * step_size) <= eps:
+        if np.linalg.norm(step_direction) <= eps:
             break
     return SteepestDescentResult(
         max_iteration=iteration + 1,
